@@ -1,5 +1,7 @@
 # 💫 About Me:
-I am a Cloud Architect—an engineer and problem-solver at heart! DevOps and SRE for SaaS, PaaS, and IaaS are my strong suits. I also enjoy tinkering with IoT in my home lab from time to time.<br> 
+I am a Cloud Architect—an engineer and problem-solver at heart! 
+DevOps and SRE for SaaS, PaaS, and IaaS are my strong suits. 
+I also enjoy tinkering with IoT in my home lab from time to time.<br> 
 
 
 ## 🌐 Socials:
