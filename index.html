@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreyas Wankhede — Cloud Platform Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1120;
+    --bg-panel:#111A2E;
+    --bg-panel-2:#0E1626;
+    --grid-line:rgba(139,150,172,0.07);
+    --border:#22304C;
+    --border-soft:#1A2540;
+    --text:#E8ECF4;
+    --text-dim:#8B96AC;
+    --text-faint:#5A6480;
+    --amber:#FFB454;
+    --amber-dim:rgba(255,180,84,0.14);
+    --teal:#5EEAD4;
+    --teal-dim:rgba(94,234,212,0.14);
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0/44px 44px,
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0/44px 44px,
+      var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--amber-dim);color:var(--amber);}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;align-items:center;gap:8px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal);animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-0.01em;}
+  .section-head{margin-bottom:44px;}
+  .section-head h2{font-size:28px;color:var(--text);}
+  .section-head p{color:var(--text-dim);margin-top:8px;font-size:15px;max-width:520px;}
+  section{padding:96px 0;border-bottom:1px solid var(--border-soft);}
+  @media (max-width:640px){section{padding:64px 0;}.wrap{padding:0 20px;}}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,17,32,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  nav .inner{
+    max-width:1080px;margin:0 auto;padding:0 32px;
+    height:64px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-family:var(--font-mono);font-weight:600;font-size:15px;color:var(--text);}
+  .logo span{color:var(--amber);}
+  .navlinks{display:flex;gap:28px;font-family:var(--font-mono);font-size:13px;color:var(--text-dim);}
+  .navlinks a{text-decoration:none;transition:color .15s;}
+  .navlinks a:hover{color:var(--amber);}
+  .navstatus{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;color:var(--text-dim);}
+  .navstatus .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2s ease-in-out infinite;}
+  @media (max-width:800px){.navlinks{display:none;}}
+
+  /* HERO */
+  .hero{padding:88px 0 80px;border-bottom:1px solid var(--border-soft);}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(36px,5vw,56px);margin:16px 0 8px;color:var(--text);}
+  .role-line{font-family:var(--font-mono);color:var(--amber);font-size:16px;margin-bottom:20px;}
+  .hero p.lede{color:var(--text-dim);font-size:16px;max-width:480px;margin-bottom:32px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px;}
+  .btn{
+    font-family:var(--font-mono);font-size:13px;letter-spacing:0.03em;
+    padding:12px 20px;border-radius:6px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;transition:all .15s;
+    border:1px solid var(--border);
+  }
+  .btn-primary{background:var(--amber);color:#0B1120;border-color:var(--amber);font-weight:600;}
+  .btn-primary:hover{background:#ffc372;}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+
+  .stat-strip{display:flex;gap:32px;flex-wrap:wrap;font-family:var(--font-mono);}
+  .stat-strip .stat{}
+  .stat-strip .num{font-size:22px;color:var(--teal);font-weight:600;}
+  .stat-strip .lbl{font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+
+  /* SIGNATURE DIAGRAM */
+  .diagram-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
+  .diagram-caption{
+    position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
+    font-family:var(--font-mono);font-size:11px;color:var(--text-faint);
+    text-align:center;letter-spacing:.04em;white-space:nowrap;
+  }
+  svg#splitDiagram{width:100%;max-width:380px;height:auto;overflow:visible;}
+  .node-core{fill:var(--bg-panel);stroke:var(--border);stroke-width:1.5;}
+  .node-a{fill:var(--bg-panel);stroke:var(--amber);stroke-width:1.5;}
+  .node-b{fill:var(--bg-panel);stroke:var(--teal);stroke-width:1.5;}
+  .link-line{stroke:var(--border);stroke-width:1.2;fill:none;stroke-dasharray:4 4;}
+  .orbit-dot{opacity:0;}
+  .orbit-dot.amber{fill:var(--amber);}
+  .orbit-dot.teal{fill:var(--teal);}
+  .diagram-label{font-family:var(--font-mono);font-size:10px;fill:var(--text-dim);text-anchor:middle;}
+
+  .grp-core{animation:coreFade 900ms ease-out forwards;}
+  .grp-a{animation:moveA 1400ms 500ms cubic-bezier(.16,.9,.3,1) forwards;opacity:0;}
+  .grp-b{animation:moveB 1400ms 500ms cubic-bezier(.16,.9,.3,1) forwards;opacity:0;}
+  .link{animation:linkFade 800ms 1600ms ease-out forwards;opacity:0;}
+  .orbit-dot{animation:dotFade 600ms 2100ms ease-out forwards;}
+
+  @keyframes coreFade{from{opacity:0;transform:scale(.7);}to{opacity:1;transform:scale(1);}}
+  @keyframes moveA{
+    0%{opacity:1;transform:translate(0,0) scale(.55);}
+    100%{opacity:1;transform:translate(-92px,10px) scale(1);}
+  }
+  @keyframes moveB{
+    0%{opacity:1;transform:translate(0,0) scale(.55);}
+    100%{opacity:1;transform:translate(92px,10px) scale(1);}
+  }
+  @keyframes linkFade{to{opacity:1;}}
+  @keyframes dotFade{to{opacity:1;}}
+  @media (prefers-reduced-motion: reduce){
+    .grp-a,.grp-b,.link,.orbit-dot,.grp-core{animation:none !important;opacity:1 !important;transform:none !important;}
+    .grp-a{transform:translate(-92px,10px) !important;}
+    .grp-b{transform:translate(92px,10px) !important;}
+  }
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.3fr 0.7fr;gap:56px;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--text-dim);margin-bottom:16px;font-size:15.5px;}
+  .about-grid strong{color:var(--text);font-weight:600;}
+  .console{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;
+    padding:20px 22px;font-family:var(--font-mono);font-size:12.5px;color:var(--text-dim);
+  }
+  .console .line{margin-bottom:10px;display:flex;gap:8px;}
+  .console .prompt{color:var(--amber);}
+  .console .val{color:var(--text);}
+  .uptime-box{
+    margin-top:18px;padding-top:16px;border-top:1px dashed var(--border);
+  }
+  .uptime-box .num{color:var(--teal);font-size:20px;font-weight:600;}
+  .uptime-box .lbl{color:var(--text-faint);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+
+  /* EXPERIENCE / DEPLOYMENT LOG */
+  .log{position:relative;padding-left:26px;}
+  .log::before{
+    content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;
+    background:linear-gradient(var(--border),var(--border) 90%,transparent);
+  }
+  .log-entry{position:relative;padding-bottom:48px;}
+  .log-entry:last-child{padding-bottom:0;}
+  .log-entry::before{
+    content:"";position:absolute;left:-26px;top:4px;width:9px;height:9px;border-radius:2px;
+    background:var(--bg);border:2px solid var(--amber);
+  }
+  .log-entry.current::before{border-color:var(--teal);box-shadow:0 0 10px var(--teal);}
+  .log-ts{font-family:var(--font-mono);font-size:12px;color:var(--text-faint);letter-spacing:.03em;}
+  .log-ts .badge{
+    display:inline-block;margin-left:8px;padding:2px 8px;border-radius:4px;
+    font-size:10px;background:var(--teal-dim);color:var(--teal);letter-spacing:.05em;
+  }
+  .log-role{font-family:var(--font-display);font-size:19px;margin:6px 0 2px;color:var(--text);}
+  .log-co{font-family:var(--font-mono);font-size:12.5px;color:var(--amber);margin-bottom:12px;}
+  .log-entry ul{list-style:none;}
+  .log-entry li{
+    color:var(--text-dim);font-size:14.5px;margin-bottom:8px;padding-left:16px;position:relative;
+  }
+  .log-entry li::before{content:"›";position:absolute;left:0;color:var(--text-faint);}
+
+  /* STACK */
+  .stack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media (max-width:700px){.stack-grid{grid-template-columns:1fr;}}
+  .stack-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;padding:22px 24px;}
+  .stack-card h4{font-family:var(--font-mono);font-size:11.5px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{
+    font-family:var(--font-mono);font-size:12px;color:var(--text);
+    border:1px solid var(--border);padding:5px 10px;border-radius:5px;background:var(--bg-panel-2);
+  }
+
+  /* METRICS */
+  .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media (max-width:900px){.metrics-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:500px){.metrics-grid{grid-template-columns:1fr;}}
+  .metric-card{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;
+    padding:22px 20px;position:relative;overflow:hidden;
+  }
+  .metric-card::after{
+    content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg,var(--amber),var(--teal));opacity:.5;
+  }
+  .metric-card .num{font-family:var(--font-mono);font-size:30px;font-weight:600;color:var(--text);}
+  .metric-card .cap{font-size:13px;color:var(--text-dim);margin-top:8px;line-height:1.45;}
+
+  /* CERTS */
+  .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  @media (max-width:800px){.cert-grid{grid-template-columns:1fr;}}
+  .cert-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;padding:22px;}
+  .cert-card .status{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:14px;}
+  .status.earned{background:var(--teal-dim);color:var(--teal);}
+  .status.progress{background:var(--amber-dim);color:var(--amber);}
+  .cert-card h4{font-family:var(--font-display);font-size:16px;margin-bottom:8px;}
+  .cert-card p{font-size:13px;color:var(--text-dim);margin-bottom:14px;}
+  .progress-track{height:5px;border-radius:3px;background:var(--bg-panel-2);border:1px solid var(--border);overflow:hidden;}
+  .progress-fill{height:100%;background:var(--amber);}
+
+  /* CONTACT */
+  .contact-console{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;
+    padding:32px;font-family:var(--font-mono);font-size:13.5px;
+  }
+  .contact-console .l1{color:var(--text-faint);margin-bottom:4px;}
+  .contact-console .l2{color:var(--amber);margin-bottom:22px;}
+  .contact-console .row{display:flex;gap:10px;margin-bottom:8px;color:var(--text-dim);}
+  .contact-console .row .k{color:var(--text-faint);min-width:96px;}
+  .contact-console .row .v a{color:var(--teal);text-decoration:none;}
+  .contact-console .row .v a:hover{text-decoration:underline;}
+  .contact-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
+
+  footer{padding:36px 0;text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--text-faint);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <div class="logo">SW<span>_</span>ARCHITECT</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#log">Experience</a>
+      <a href="#stack">Stack</a>
+      <a href="#metrics">Metrics</a>
+      <a href="#certs">Certs</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="navstatus"><span class="dot"></span> ALL SYSTEMS OPERATIONAL</div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> 300+ ENVIRONMENTS MANAGED · 99.95% UPTIME</div>
+      <h1>Shreyas Wankhede</h1>
+      <div class="role-line">Cloud Platform Architect</div>
+      <p class="lede">I design and operate enterprise SaaS platforms that can't afford downtime — architecting the system, building the pipeline that ships it, and keeping the fleet reliable at scale.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:shreyas.wankhede@outlook.com">Get in touch</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/shreyas-wankhede12/" target="_blank" rel="noopener">View LinkedIn</a>
+      </div>
+      <div class="stat-strip">
+        <div class="stat"><div class="num">7+</div><div class="lbl">Years in Cloud ALM</div></div>
+        <div class="stat"><div class="num">300+</div><div class="lbl">Enterprise customers</div></div>
+        <div class="stat"><div class="num">99.95%</div><div class="lbl">Fleet uptime</div></div>
+        <div class="stat"><div class="num">6</div><div class="lbl">Countries led</div></div>
+      </div>
+    </div>
+    <div class="diagram-wrap">
+      <svg id="splitDiagram" viewBox="-140 -110 280 220">
+        <g class="link">
+          <path class="link-line" d="M -78 10 Q 0 -30 78 10"></path>
+        </g>
+        <g class="grp-a">
+          <circle class="node-a" cx="0" cy="0" r="34"></circle>
+          <text class="diagram-label" x="0" y="4">PLATFORM A</text>
+          <circle class="orbit-dot amber" cx="-44" cy="-20" r="2.4"></circle>
+          <circle class="orbit-dot amber" cx="30" cy="-38" r="2.2"></circle>
+          <circle class="orbit-dot amber" cx="42" cy="18" r="2"></circle>
+        </g>
+        <g class="grp-b">
+          <circle class="node-b" cx="0" cy="0" r="34"></circle>
+          <text class="diagram-label" x="0" y="4">PLATFORM B</text>
+          <circle class="orbit-dot teal" cx="44" cy="-18" r="2.4"></circle>
+          <circle class="orbit-dot teal" cx="-32" cy="-36" r="2.2"></circle>
+          <circle class="orbit-dot teal" cx="-42" cy="20" r="2"></circle>
+        </g>
+        <g class="grp-core">
+          <circle class="node-core" cx="0" cy="-58" r="20" opacity="0.55"></circle>
+          <text class="diagram-label" x="0" y="-54" opacity="0.6">SHARED GLOBAL</text>
+        </g>
+      </svg>
+      <div class="diagram-caption">Advantedge Business Unit Separation — one platform, split live, zero customer disruption</div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="section-head">
+        <h2>About</h2>
+        <p>Where architecture, automation and operations meet.</p>
+      </div>
+      <p>I lead architecture and platform strategy for <strong>Polarion Cloud</strong> at Siemens Digital Industries Software — an enterprise ALM/PLM SaaS platform serving over 300 global customers. My role sits at the intersection of three disciplines that usually live in separate teams: solution architecture, DevOps automation, and SaaS operations.</p>
+      <p>I translate business requirements into cloud architecture, then build the infrastructure-as-code and CI/CD pipelines that ship it, then own the operational readiness that keeps it running. That full-loop ownership is how a shared global environment gets split into two independent, fully operational cloud platforms — the <strong>Advantedge Business Unit Separation</strong> — without a single customer noticing.</p>
+      <p>Most recently I led the fleet-wide rollout of <strong>SALT Licensing</strong>, a first-of-a-kind initiative that set the deployment standard now reused across the organization, and I mentor engineering teams on architecture and operational best practice.</p>
+    </div>
+    <div class="console">
+      <div class="line"><span class="prompt">$</span><span>whoami</span></div>
+      <div class="line val">product_architect · pune, india</div>
+      <div class="line" style="margin-top:14px"><span class="prompt">$</span><span>current_role</span></div>
+      <div class="line val">Siemens Digital Industries Software</div>
+      <div class="line val">Jan 2024 → present</div>
+      <div class="uptime-box">
+        <div class="num" id="uptimeCounter">—</div>
+        <div class="lbl">Career uptime since Aug 2018</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="log">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Deployment Log</h2>
+      <p>Career history, ordered like a release timeline — because that's how it happened.</p>
+    </div>
+    <div class="log">
+      <div class="log-entry current">
+        <div class="log-ts">JAN 2024 → PRESENT <span class="badge">CURRENT</span></div>
+        <div class="log-role">Product Architect</div>
+        <div class="log-co">Siemens Digital Industries Software</div>
+        <ul>
+          <li>Lead architecture and technical design of enterprise Polarion cloud solutions, balancing scalability, security and maintainability against customer requirements.</li>
+          <li>Architected the Advantedge Business Unit Separation — migration strategy from a shared global environment into two independent cloud platforms with zero disruption to operational continuity.</li>
+          <li>Led the first-of-a-kind rollout of SALT Licensing across the managed services fleet, setting deployment standards and operational procedures now reused org-wide.</li>
+          <li>Partner across Product Development, Cloud Engineering, Operations and Global Product Support to validate architecture changes and ship new platform capabilities.</li>
+          <li>Mentor engineering teams on Polarion architecture, troubleshooting and best practice for complex customer scenarios.</li>
+        </ul>
+      </div>
+      <div class="log-entry">
+        <div class="log-ts">JAN 2022 → DEC 2023</div>
+        <div class="log-role">Implementation Consultant</div>
+        <div class="log-co">Siemens Digital Industries Software</div>
+        <ul>
+          <li>Led Cloud Application Services operations for 50+ Polarion SaaS environments on AWS — onboarding, production operations, release planning and operational readiness.</li>
+          <li>Coordinated fleet upgrades and cloud onboarding with Product Development, Cloud Engineering and Operations for smooth, low-impact production rollouts.</li>
+          <li>Built reusable Python automation, operational dashboards, and training programs that standardized support practice across the team.</li>
+          <li>Drove incident resolution and root-cause analysis, cutting diagnostic effort by 90% and lifting system reliability by 40%.</li>
+        </ul>
+      </div>
+      <div class="log-entry">
+        <div class="log-ts">AUG 2018 → DEC 2021</div>
+        <div class="log-role">Associate Consultant</div>
+        <div class="log-co">Siemens Digital Industries Software</div>
+        <ul>
+          <li>Supported cloud operations for enterprise Polarion SaaS environments on AWS, maintaining 99.9% service availability across managed customer environments.</li>
+          <li>Built automation scripts and reusable operational knowledge assets that reduced manual effort and standardized support practice.</li>
+          <li>Developed the product and operational grounding that later underpinned leadership in onboarding, release management and SaaS operations.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Architecture Stack</h2>
+      <p>The tools behind the system design, the pipeline, and the fleet that runs on it.</p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <h4>Cloud & Infrastructure</h4>
+        <div class="tag-row">
+          <span class="tag">AWS</span><span class="tag">Linux</span><span class="tag">Terraform</span>
+          <span class="tag">Infrastructure as Code</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h4>CI/CD & Automation</h4>
+        <div class="tag-row">
+          <span class="tag">Jenkins</span><span class="tag">GitLab CI/CD</span><span class="tag">GitHub Actions</span>
+          <span class="tag">Ansible</span><span class="tag">Python</span><span class="tag">Bash</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h4>Observability & Reliability</h4>
+        <div class="tag-row">
+          <span class="tag">Datadog</span><span class="tag">Grafana</span><span class="tag">Prometheus</span>
+          <span class="tag">CloudWatch</span><span class="tag">ELK</span><span class="tag">Disaster Recovery</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h4>Security, Compliance & ALM</h4>
+        <div class="tag-row">
+          <span class="tag">SOC 2</span><span class="tag">ISO 27001</span><span class="tag">Polarion ALM</span>
+          <span class="tag">Requirements Mgmt</span><span class="tag">Release Mgmt</span><span class="tag">REST APIs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metrics">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Uptime & Impact</h2>
+      <p>What changed on the fleet because of the work.</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card"><div class="num">99.95%</div><div class="cap">Uptime across the managed Polarion Cloud fleet</div></div>
+      <div class="metric-card"><div class="num">300+</div><div class="cap">Global enterprise customers supported in production</div></div>
+      <div class="metric-card"><div class="num">90%</div><div class="cap">Reduction in diagnostic effort through automation</div></div>
+      <div class="metric-card"><div class="num">40%</div><div class="cap">Improvement in overall system reliability</div></div>
+      <div class="metric-card"><div class="num">50%</div><div class="cap">Faster deployments via cloud-native CI/CD pipelines</div></div>
+      <div class="metric-card"><div class="num">30%</div><div class="cap">Fewer critical incidents after root-cause driven fixes</div></div>
+      <div class="metric-card"><div class="num">15+</div><div class="cap">Engineers led across 6 countries</div></div>
+      <div class="metric-card"><div class="num">$2M+</div><div class="cap">Cloud transformation project delivered end-to-end</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Certifications</h2>
+      <p>AWS credentials, tracked like everything else.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <span class="status earned">Earned</span>
+        <h4>AWS Certified Cloud Practitioner</h4>
+        <p>Foundational grounding in AWS services and deployment models.</p>
+      </div>
+      <div class="cert-card">
+        <span class="status earned">Earned</span>
+        <h4>AWS Certified AI Practitioner</h4>
+        <p>Machine learning and AI services expertise on the AWS platform.</p>
+      </div>
+      <div class="cert-card">
+        <span class="status progress">In progress</span>
+        <h4>AWS Solutions Architect – Associate</h4>
+        <p>Advanced architectural design and implementation.</p>
+        <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Contact</h2>
+      <p>Open to Cloud DevOps, Platform Architecture and SaaS Operations leadership roles.</p>
+    </div>
+    <div class="contact-console">
+      <div class="l1">$ cat contact.txt</div>
+      <div class="l2">// reach out any time — usually online</div>
+      <div class="row"><span class="k">email</span><span class="v"><a href="mailto:shreyas.wankhede@outlook.com">shreyas.wankhede@outlook.com</a></span></div>
+      <div class="row"><span class="k">phone</span><span class="v"><a href="tel:+917875444899">+91 78754 44899</a></span></div>
+      <div class="row"><span class="k">location</span><span class="v">Pune, India</span></div>
+      <div class="row"><span class="k">linkedin</span><span class="v"><a href="https://www.linkedin.com/in/shreyas-wankhede12/" target="_blank" rel="noopener">/in/shreyas-wankhede12</a></span></div>
+      <div class="contact-btns">
+        <a class="btn btn-primary" href="mailto:shreyas.wankhede@outlook.com">Send email</a>
+        <a class="btn btn-ghost" href="tel:+917875444899">Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Shreyas Wankhede — Cloud Platform Architect · Pune, India · Built <span id="year"></span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Career "uptime" counter since Aug 1, 2018
+  function updateUptime(){
+    const start = new Date(2018, 7, 1); // Aug 1 2018
+    const now = new Date();
+    let years = now.getFullYear() - start.getFullYear();
+    let months = now.getMonth() - start.getMonth();
+    let days = now.getDate() - start.getDate();
+    if(days < 0){
+      months -= 1;
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+    if(months < 0){
+      years -= 1;
+      months += 12;
+    }
+    document.getElementById('uptimeCounter').textContent = `${years}y ${months}m ${days}d`;
+  }
+  updateUptime();
+</script>
+
+</body>
+</html>
